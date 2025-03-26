@@ -1,5 +1,5 @@
 (function () {
-  const TOP_DUCKS = ["Nam", "Bình", "HLinh", "Phương", "Chính", "NLinh"];  // Ducks that should always be in the top 6
+  const TOP_DUCKS = ["Bình", "HLinh", "Phương", "Nam", "Chính", "NLinh"];  // New Top 6 Ducks
   const LAST_DUCK_NAME = "Lan";  // The duck that should always be last
   const outputColor = "color:yellow; font-size:14px; font-weight: bold;";
 
@@ -22,13 +22,13 @@
         // Filter out the ducks that should be in the top 6
         let topDucks = result.filter((i) => TOP_DUCKS.includes(i?.name));
 
-        // Move the top ducks to the first 6 positions
+        // Filter out the rest of the ducks
         let otherDucks = result.filter((i) => !TOP_DUCKS.includes(i?.name));
 
         // Shuffle the top ducks to randomize their order within the top 6
         topDucks = win.Array.prototype.shuffle.call(topDucks);
 
-        // Concatenate the top ducks and other ducks back together
+        // Concatenate the shuffled top ducks (in first 6 positions) and the rest of the ducks
         result.length = 0;  // Clear the original array
         result.push(...topDucks.slice(0, 6), ...otherDucks);
 
