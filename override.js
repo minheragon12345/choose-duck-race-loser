@@ -26,7 +26,7 @@
         let otherDucks = result.filter((i) => !TOP_DUCKS.includes(i?.name));
 
         // Shuffle the top ducks to randomize their order within the top 6
-        topDucks = win.Array.prototype.shuffle.call(topDucks);
+        topDucks = topDucks.sort(() => Math.random() - 0.5); // Manual shuffle without calling shuffle again
 
         // Concatenate the shuffled top ducks (in first 6 positions) and the rest of the ducks
         result.length = 0;  // Clear the original array
