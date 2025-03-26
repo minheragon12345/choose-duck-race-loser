@@ -1,9 +1,10 @@
 (function () {
-  const SELECTED_WINNER_NUMBER = localStorage.getItem("tms-winner");
+  const FIRST_DUCK_NAME = "Nam";  // The duck that should always be first
+  const LAST_DUCK_NAME = "Lan";   // The duck that should always be last
   const outputColor = "color:yellow; font-size:14px; font-weight: bold;";
 
   console.log(
-    `%c Patched by @tmsanghoclaptrinh - Loser's number is: ${SELECTED_WINNER_NUMBER}`,
+    `%c Patched by @tmsanghoclaptrinh - First Duck: ${FIRST_DUCK_NAME}, Last Duck: ${LAST_DUCK_NAME}`,
     outputColor
   );
 
@@ -17,17 +18,27 @@
 
       win.Array.prototype.shuffle = function () {
         const result = win.ufs_duckRace_originalShuffle.apply(this, arguments);
-        let targetIndex = result.findIndex(
-          (i) =>
-            i?.name === SELECTED_WINNER_NUMBER ||
-            i?.number == SELECTED_WINNER_NUMBER
+
+        // Find the index of the ducks with the names "Nam" and "Lan"
+        let firstDuckIndex = result.findIndex(
+          (i) => i?.name === FIRST_DUCK_NAME
+        );
+        let lastDuckIndex = result.findIndex(
+          (i) => i?.name === LAST_DUCK_NAME
         );
 
-        if (targetIndex >= 0) {
-          // Move the selected number to the last position
+        // Ensure "Nam" is in the first position
+        if (firstDuckIndex >= 0 && firstDuckIndex !== 0) {
+          let temp = result[0];
+          result[0] = result[firstDuckIndex];
+          result[firstDuckIndex] = temp;
+        }
+
+        // Ensure "Lan" is in the last position
+        if (lastDuckIndex >= 0 && lastDuckIndex !== result.length - 1) {
           let temp = result[result.length - 1];
-          result[result.length - 1] = result[targetIndex];
-          result[targetIndex] = temp;
+          result[result.length - 1] = result[lastDuckIndex];
+          result[lastDuckIndex] = temp;
         }
 
         return result;
