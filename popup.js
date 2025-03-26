@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("startBtn", function () {
   submitButton.addEventListener("click", function () {
     saveValue();
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -11,4 +11,4 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     });
   });
-}
+});
