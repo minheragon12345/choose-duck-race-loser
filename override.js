@@ -1,5 +1,5 @@
 (function () {
-  const TOP_DUCKS = ["Bình", "HLinh", "Phương", "Nam", "Chính", "NLinh"];  // New Top 6 Ducks
+  const TOP_DUCKS = ["Bình", "HLinh", "Hà Phương", "Nam", "Chính", "NLinh", "Phương"];  // New Top 6 Ducks
   const LAST_DUCK_NAME = "Lan";  // The duck that should always be last
   const outputColor = "color:yellow; font-size:14px; font-weight: bold;";
 
