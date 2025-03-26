@@ -1,10 +1,12 @@
 (function () {
   const SELECTED_WINNER_NUMBER = localStorage.getItem("tms-winner");
   const outputColor = "color:yellow; font-size:14px; font-weight: bold;";
+
   console.log(
-    `%c Patched by @tmsanghoclaptrinh - Winner's number is: ${SELECTED_WINNER_NUMBER}`,
+    `%c Patched by @tmsanghoclaptrinh - Loser's number is: ${SELECTED_WINNER_NUMBER}`,
     outputColor
   );
+
   let iframe = document.querySelector('iframe[src*="duck-race"]');
 
   [window, iframe?.contentWindow]
@@ -22,10 +24,12 @@
         );
 
         if (targetIndex >= 0) {
-          let temp = result[0];
-          result[0] = result[targetIndex];
+          // Move the selected number to the last position
+          let temp = result[result.length - 1];
+          result[result.length - 1] = result[targetIndex];
           result[targetIndex] = temp;
         }
+
         return result;
       };
     });
