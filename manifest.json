@@ -1,29 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Choose Duck Race Winner",
-  "author": "Trần Minh Sáng",
+  "name": "Duck Race Manipulator",
   "version": "1.0",
-  "description": "Extension allows you to choose the winner of the Duck Race game using JavaScript",
-  "action": {
-    "default_popup": "popup.html"
+  "description": "Automatically manipulate Duck Race results.",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
   },
-  "icons": {
-    "16": "icons/icon16.png",
-    "32": "icons/icon32.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
-  "permissions": ["activeTab", "scripting"],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": ["https://www.online-stopwatch.com/duck-race/"],
+      "js": ["content.js", "override.js"],
+      "run_at": "document_end"
     }
   ],
-  "web_accessible_resources": [
-    {
-      "resources": ["override.js"],
-      "matches": ["<all_urls>"]
-    }
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
   ]
 }
