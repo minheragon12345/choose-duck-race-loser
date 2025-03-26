@@ -1,13 +1,14 @@
-document.getElementById("startBtn").addEventListener("click", () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.scripting.executeScript({
-      target: { tabId: tabs[0].id },
-      func: startRaceManipulation
+document.addEventListener("DOMContentLoaded", function () {
+  submitButton.addEventListener("click", function () {
+    saveValue();
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        { action: "overrideWinner", winner: winner },
+        (response) => {
+          window.close();
+        }
+      );
     });
   });
-});
-
-function startRaceManipulation() {
-  // Send a message to the content script to activate the logic
-  chrome.runtime.sendMessage({ action: "overrideWinner" });
 }
