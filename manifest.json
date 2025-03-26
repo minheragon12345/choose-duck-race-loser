@@ -1,9 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Choose Duck Race Winner",
-  "author": "MinhEragon",
+  "author": "Trần Minh Sáng",
   "version": "1.0",
   "description": "Extension allows you to choose the winner of the Duck Race game using JavaScript",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -13,15 +16,14 @@
   "permissions": ["activeTab", "scripting"],
   "content_scripts": [
     {
-      "matches": ["https://www.online-stopwatch.com/duck-race/*"],
-      "js": ["content.js", "override.js"],
-      "run_at": "document_end"
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": ["override.js"],
-      "matches": ["https://www.online-stopwatch.com/duck-race/*"]
+      "matches": ["<all_urls>"]
     }
   ]
 }
