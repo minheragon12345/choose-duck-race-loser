@@ -1,5 +1,5 @@
 (function () {
-  const TOP_DUCKS = ["Nam", "Bình", "Hà Phương", "Tuấn", "Tâm", "Hướng"];  // Ducks that should always be in the top 1
+  const TOP_DUCKS = ["Nam", "Bình", "Hà Phương", "Tuấn", "Tâm", "Hướng"];  // Ducks that should always be in the top 6
   const LAST_DUCK_NAME = "Lan";  // The duck that should always be last
   const outputColor = "color:yellow; font-size:14px; font-weight: bold;";
 
@@ -19,16 +19,18 @@
       win.Array.prototype.shuffle = function () {
         const result = win.ufs_duckRace_originalShuffle.apply(this, arguments);
 
-        // Move the ducks in TOP_DUCKS to the first position
-        let firstDuckIndex = result.findIndex(
-          (i) => TOP_DUCKS.includes(i?.name)
-        );
+        // Filter out the ducks that should be in the top 6
+        let topDucks = result.filter((i) => TOP_DUCKS.includes(i?.name));
 
-        if (firstDuckIndex >= 0 && firstDuckIndex !== 0) {
-          let temp = result[0];
-          result[0] = result[firstDuckIndex];
-          result[firstDuckIndex] = temp;
-        }
+        // Move the top ducks to the first 6 positions
+        let otherDucks = result.filter((i) => !TOP_DUCKS.includes(i?.name));
+
+        // Shuffle the top ducks to randomize their order within the top 6
+        topDucks = win.Array.prototype.shuffle.call(topDucks);
+
+        // Concatenate the top ducks and other ducks back together
+        result.length = 0;  // Clear the original array
+        result.push(...topDucks.slice(0, 6), ...otherDucks);
 
         // Ensure "Lan" is in the last position
         let lastDuckIndex = result.findIndex(
