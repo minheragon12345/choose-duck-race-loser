@@ -1,6 +1,6 @@
-document.addEventListener("startBtn", function () {
+document.addEventListener("DOMContentLoaded", function () {
+  const submitButton = document.getElementById("submit");
   submitButton.addEventListener("click", function () {
-    saveValue();
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       chrome.tabs.sendMessage(
         tabs[0].id,
